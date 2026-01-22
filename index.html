@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AhaKurs.de | Dein Aha-Moment beim Programmieren</title>
+    <meta name="description" content="Lerne Coden ohne Frust. Kurze, praxisnahe Programmierkurse für absolute Anfänger in Deutschland.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            navy: '#0f172a', // Slate 900
+                            dark: '#020617', // Slate 950
+                            teal: '#14b8a6', // Teal 500
+                            tealLight: '#2dd4bf', // Teal 400
+                            tealDark: '#0d9488', // Teal 600
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .container-padding {
+                @apply px-4 sm:px-6 lg:px-8;
+            }
+            .section-padding {
+                @apply py-16 lg:py-24;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-slate-600 bg-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto container-padding">
+            <div class="flex justify-between items-center h-16 sm:h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold tracking-tight text-brand-navy flex items-center gap-2">
+                        <svg class="w-8 h-8 text-brand-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                        AhaKurs
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#courses" class="text-slate-600 hover:text-brand-teal font-medium transition-colors">Kurse</a>
+                    <a href="#features" class="text-slate-600 hover:text-brand-teal font-medium transition-colors">So funktioniert's</a>
+                    <a href="#about" class="text-slate-600 hover:text-brand-teal font-medium transition-colors">Über uns</a>
+                    <a href="#courses" class="bg-brand-navy hover:bg-brand-dark text-white px-5 py-2.5 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5">
+                        Jetzt starten
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-brand-navy focus:outline-none p-2" aria-label="Menü öffnen">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#courses" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition-colors">Kurse</a>
+                <a href="#features" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition-colors">So funktioniert's</a>
+                <a href="#about" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition-colors">Über uns</a>
+                <div class="pt-4 px-3">
+                    <a href="#courses" class="block w-full text-center bg-brand-navy text-white px-5 py-3 rounded-xl font-semibold shadow-md">
+                        Jetzt starten
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-brand-navy">
+        <!-- Background/Pattern -->
+        <div class="absolute inset-0 z-0">
+             <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+             <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-teal opacity-20 blur-3xl"></div>
+             <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-blue-600 opacity-20 blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto container-padding relative z-10 text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold text-white tracking-tight mb-6 animate-fade-in-up">
+                Dein <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-blue-400">Aha-Moment</span><br class="hidden sm:block" /> beim Programmieren.
+            </h1>
+            <p class="mt-6 text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10 animate-fade-in-up" style="animation-delay: 0.1s;">
+                Lerne Coden ohne Frust. Kurze, praxisnahe Kurse für absolute Anfänger. Schritt für Schritt zum eigenen Projekt.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up" style="animation-delay: 0.2s;">
+                <a href="#courses" class="w-full sm:w-auto px-8 py-4 bg-brand-teal hover:bg-brand-tealDark text-white text-lg font-bold rounded-xl shadow-lg shadow-teal-500/30 transition-all transform hover:-translate-y-1 hover:shadow-xl flex items-center justify-center gap-2">
+                    Kurse ansehen
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+                </a>
+                <a href="#" class="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/20 text-lg font-semibold rounded-xl transition-all flex items-center justify-center">
+                   Kostenlose Vorschau
+                </a>
+            </div>
+
+            <div class="mt-12 flex items-center justify-center gap-2 text-sm text-slate-400 animate-fade-in-up" style="animation-delay: 0.3s;">
+                <div class="flex -space-x-2">
+                    <img class="inline-block h-8 w-8 rounded-full ring-2 ring-brand-navy grayscale opacity-70" src="https://i.pravatar.cc/100?img=1" alt=""/>
+                    <img class="inline-block h-8 w-8 rounded-full ring-2 ring-brand-navy grayscale opacity-70" src="https://i.pravatar.cc/100?img=2" alt=""/>
+                    <img class="inline-block h-8 w-8 rounded-full ring-2 ring-brand-navy grayscale opacity-70" src="https://i.pravatar.cc/100?img=3" alt=""/>
+                </div>
+                <span>Über <strong class="text-white">1.000+ zufriedene Schüler</strong> haben bereits gestartet.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features / Benefits -->
+    <section id="features" class="section-padding bg-slate-50">
+        <div class="max-w-7xl mx-auto container-padding">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-brand-navy sm:text-4xl">Warum AhaKurs?</h2>
+                <p class="mt-4 text-lg text-slate-600">Wir konzentrieren uns auf das Wesentliche, damit du schneller Ziele erreichst.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-slate-100">
+                    <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-3">Praxis statt Theorie</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Kein stundenlanges "Büffeln". Wir bauen von Anfang an echte Projekte, die du für dein Portfolio nutzen kannst.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-slate-100">
+                    <div class="w-14 h-14 bg-teal-50 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-brand-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-3">Lebenslanger Zugriff</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Lerne in deinem eigenen Tempo. Einmal gekauft, gehören die Kursinhalte, Updates inklusive, für immer dir.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-slate-100">
+                    <div class="w-14 h-14 bg-purple-50 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-3">Zertifikat inklusive</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Zeige was du kannst. Nach Abschluss jedes Kurses erhältst du ein persönliches Zertifikat für deinen Lebenslauf.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="section-padding bg-white">
+        <div class="max-w-7xl mx-auto container-padding">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+                <div class="max-w-2xl">
+                    <h2 class="text-3xl font-bold text-brand-navy sm:text-4xl">Unsere Kurse</h2>
+                    <p class="mt-4 text-lg text-slate-600">Investiere in deine Zukunft mit Skills, die gefragt sind.</p>
+                </div>
+                <a href="#" class="text-brand-teal font-semibold hover:text-brand-tealDark flex items-center gap-1 group">
+                    Alle Kurse ansehen 
+                    <span class="transform transition-transform group-hover:translate-x-1">→</span>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Course Card 1 -->
+                <div class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
+                    <div class="h-48 bg-slate-800 relative overflow-hidden">
+                        <!-- Decoration -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20"></div>
+                        <div class="absolute bottom-4 left-4 p-3 bg-white/10 backdrop-blur-md rounded-lg">
+                             <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                        </div>
+                        <span class="absolute top-4 right-4 bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Bestseller</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-brand-navy group-hover:text-brand-teal transition-colors mb-2">HTML & CSS Masterclass</h3>
+                        <p class="text-slate-600 text-sm mb-4 line-clamp-2">Der perfekte Einstieg. Baue deine erste eigene Website von Grund auf, responsive und modern.</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-sm text-slate-500 line-through">€99</span>
+                                <span class="text-2xl font-bold text-brand-navy">€49</span>
+                            </div>
+                            <button class="bg-slate-100 text-brand-navy hover:bg-brand-navy hover:text-white px-4 py-2 rounded-lg font-semibold transition-colors text-sm">
+                                Zum Kurs
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
+                    <div class="h-48 bg-slate-900 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-green-600/20 to-teal-600/20"></div>
+                        <div class="absolute bottom-4 left-4 p-3 bg-white/10 backdrop-blur-md rounded-lg">
+                             <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        </div>
+                        <span class="absolute top-4 right-4 bg-brand-teal text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Neu</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-brand-navy group-hover:text-brand-teal transition-colors mb-2">Python für Einsteiger</h3>
+                        <p class="text-slate-600 text-sm mb-4 line-clamp-2">Lerne die beliebteste Programmiersprache der Welt. Ideal für Automatisierung, Daten und KI.</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-bold text-brand-navy">€59</span>
+                            </div>
+                             <button class="bg-slate-100 text-brand-navy hover:bg-brand-navy hover:text-white px-4 py-2 rounded-lg font-semibold transition-colors text-sm">
+                                Zum Kurs
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 3 -->
+                <div class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col grayscale opacity-75 hover:grayscale-0 hover:opacity-100">
+                    <div class="h-48 bg-slate-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-orange-600/20 to-red-600/20"></div>
+                        <div class="absolute bottom-4 left-4 p-3 bg-white/10 backdrop-blur-md rounded-lg">
+                             <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>
+                        </div>
+                        <span class="absolute top-4 right-4 bg-slate-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-brand-navy group-hover:text-brand-teal transition-colors mb-2">JavaScript Deep Dive</h3>
+                        <p class="text-slate-600 text-sm mb-4 line-clamp-2">Verstehe, wie das Web wirklich funktioniert. Deep Dive in DOM, Async und modern ES6+.</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-sm font-medium text-slate-500">Bald verfügbar</span>
+                             <button class="bg-slate-100 text-slate-400 cursor-not-allowed px-4 py-2 rounded-lg font-semibold text-sm" disabled>
+                                Vormerken
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="section-padding bg-brand-navy">
+        <div class="max-w-4xl mx-auto container-padding text-center">
+            <svg class="w-12 h-12 text-brand-teal mx-auto mb-8 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.01691 21L5.01691 18C5.01691 16.8954 5.91234 16 7.01691 16H10.0169C10.5692 16 11.0169 15.5523 11.0169 15V9C11.0169 8.44772 10.5692 8 10.0169 8H6.01691C5.46462 8 5.01691 8.44772 5.01691 9V11C5.01691 11.5523 4.56919 12 4.01691 12H3.01691V5H13.0169V15C13.0169 18.3137 10.3306 21 7.01691 21H5.01691Z"/></svg>
+            
+            <blockquote class="text-2xl sm:text-3xl font-medium text-white leading-relaxed mb-8">
+                "Endlich habe ich die Logik hinter dem Programmieren verstanden! AhaKurs erklärt alles so, dass es auch ohne Mathe-Studium Sinn ergibt. Absolute Empfehlung."
+            </blockquote>
+            
+            <div class="flex flex-col items-center">
+                <img class="w-16 h-16 rounded-full border-2 border-brand-teal mb-3" src="https://i.pravatar.cc/150?img=11" alt="Student">
+                <div class="text-white font-bold">Thomas Müller</div>
+                <div class="text-brand-teal text-sm">Berlin, HTML & CSS Kurs</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto container-padding">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-2 md:col-span-1">
+                    <a href="#" class="text-xl font-bold tracking-tight text-brand-navy flex items-center gap-2 mb-4">
+                        <svg class="w-6 h-6 text-brand-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                        AhaKurs
+                    </a>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Programmieren lernen leicht gemacht. <br>
+                        Made with ❤️ in Germany.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-brand-navy mb-4">Kurse</h4>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li><a href="#" class="hover:text-brand-teal transition-colors">HTML & CSS</a></li>
+                        <li><a href="#" class="hover:text-brand-teal transition-colors">Python</a></li>
+                        <li><a href="#" class="hover:text-brand-teal transition-colors">JavaScript</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-brand-navy mb-4">Unternehmen</h4>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li><a href="#" class="hover:text-brand-teal transition-colors">Über uns</a></li>
+                        <li><a href="#" class="hover:text-brand-teal transition-colors">Kontakt</a></li>
+                        <li><a href="#" class="hover:text-brand-teal transition-colors">Karriere</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-brand-navy mb-4">Rechtliches</h4>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li><a href="#" class="hover:text-brand-teal transition-colors">Impressum</a></li>
+                        <li><a href="#" class="hover:text-brand-teal transition-colors">Datenschutz</a></li>
+                        <li><a href="#" class="hover:text-brand-teal transition-colors">AGB</a></li>
+                        <li><a href="#" class="hover:text-brand-teal transition-colors">Widerrufsrecht</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
+                <p>&copy; 2026 AhaKurs.de - Alle Rechte vorbehalten.</p>
+                <div class="flex space-x-6">
+                    <!-- Social icons placeholder -->
+                    <a href="#" class="hover:text-brand-navy transition-colors">Instagram</a>
+                    <a href="#" class="hover:text-brand-navy transition-colors">LinkedIn</a>
+                    <a href="#" class="hover:text-brand-navy transition-colors">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Scroll Effect (Glassmorphism)
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.remove('py-2');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.add('py-2');
+            }
+        });
+    </script>
+</body>
+</html>
