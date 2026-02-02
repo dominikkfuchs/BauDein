@@ -1,20 +1,102 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  --background: #020617;
+  --foreground: #f8fafc;
 }
 
 @theme {
+  /* Dark Mode Base */
+  --color-brand-void: #020617;
+  --color-brand-dark: #0f172a;
+  --color-brand-surface: #1e293b;
+  
+  /* Primary Accent - Electric Purple/Indigo */
+  --color-brand-primary: #6366f1;
+  --color-brand-primaryLight: #818cf8;
+  --color-brand-primaryDark: #4f46e5;
+  
+  /* Secondary Accent - Neon Cyan */
+  --color-brand-neon: #22d3ee;
+  --color-brand-neonLight: #67e8f9;
+  --color-brand-neonDark: #06b6d4;
+  
+  /* Legacy */
   --color-brand-navy: #0f172a;
-  --color-brand-dark: #020617;
-  --color-brand-teal: #14b8a6;
-  --color-brand-tealLight: #2dd4bf;
-  --color-brand-tealDark: #0d9488;
+  --color-brand-teal: #22d3ee;
+  --color-brand-tealDark: #06b6d4;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6366f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #818cf8;
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Neon glow effects */
+.neon-glow {
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.3),
+              0 0 40px rgba(34, 211, 238, 0.2),
+              0 0 60px rgba(34, 211, 238, 0.1);
+}
+
+.primary-glow {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3),
+              0 0 40px rgba(99, 102, 241, 0.2),
+              0 0 60px rgba(99, 102, 241, 0.1);
+}
+
+/* Code snippet styling */
+.code-snippet {
+  font-family: var(--font-jetbrains), 'JetBrains Mono', monospace;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 8px;
+  padding: 2px 8px;
+  font-size: 0.875rem;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(99, 102, 241, 0.4);
+  color: #fff;
 }
